@@ -17,9 +17,9 @@ class ReceiptTest {
             receipt.commit(pant);
         }
         Assertions.assertThat(receipt.getTotal()).isEqualTo(pants.stream().mapToInt(Pant::price).sum());
-        Assertions.assertThat(receipt.getPant().size()).isEqualTo(2);
-        Assertions.assertThat(receipt.getPant().get(Bottle.class)).isEqualTo(2);
-        Assertions.assertThat(receipt.getPant().get(Can.class)).isEqualTo(1);
+        Assertions.assertThat(receipt.getPants().size()).isEqualTo(2);
+        Assertions.assertThat(receipt.getPants().get(Bottle.class)).isEqualTo(2);
+        Assertions.assertThat(receipt.getPants().get(Can.class)).isEqualTo(1);
     }
 
     @Test
@@ -28,8 +28,8 @@ class ReceiptTest {
         receipt.commit(new Bottle());
         Receipt receipt1 = new Receipt(receipt);
         Assertions.assertThat(receipt.getTotal()).isEqualTo(receipt1.getTotal());
-        Assertions.assertThat(receipt.getPant().size()).isEqualTo(receipt1.getPant().size());
-        Assertions.assertThat(receipt.getPant().get(Bottle.class)).isEqualTo(receipt1.getPant().get(Bottle.class));
+        Assertions.assertThat(receipt.getPants().size()).isEqualTo(receipt1.getPants().size());
+        Assertions.assertThat(receipt.getPants().get(Bottle.class)).isEqualTo(receipt1.getPants().get(Bottle.class));
     }
 
 }

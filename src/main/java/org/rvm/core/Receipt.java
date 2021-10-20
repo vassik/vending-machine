@@ -17,14 +17,14 @@ public class Receipt {
     public String toString() {
         String stringReceipt = "";
         for (Class key: pants.keySet()) {
-            stringReceipt+=String.format("%sX%d\n", key.getName(), pants.get(key));
+            stringReceipt+=String.format("%s x %d; ", key, pants.get(key));
         }
         stringReceipt+=String.format("Total: %d NOK", total);
         return stringReceipt;
     }
 
     public Receipt(Receipt receipt) {
-        this.pants = new HashMap<>(receipt.getPant());
+        this.pants = new HashMap<>(receipt.getPants());
         this.total = Integer.valueOf(receipt.getTotal());
     }
 
@@ -34,7 +34,7 @@ public class Receipt {
         total += pant.price();
     }
 
-    public Map<Class<? extends Pant>, Integer> getPant() {
+    public Map<Class<? extends Pant>, Integer> getPants() {
         return new HashMap<>(pants);
     }
 
