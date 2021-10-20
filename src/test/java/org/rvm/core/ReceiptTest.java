@@ -1,4 +1,4 @@
-package org.vending.machine.core;
+package org.rvm.core;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package org.vending.machine.core;
+package org.rvm.core;
 
 public interface Pant {
 

@@ -1,14 +1,14 @@
-package org.vending.machine.core;
+package org.rvm.core;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleVendingMachine implements VendingMachine {
+public class SimpleReverseVendingMachine implements ReverseVendingMachine {
 
     List<Pant> pants;
     Receipt receipt;
 
-    public SimpleVendingMachine() {
+    public SimpleReverseVendingMachine() {
         this.pants = new ArrayList<>();
     }
 

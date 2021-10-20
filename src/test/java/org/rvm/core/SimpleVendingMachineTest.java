@@ -1,4 +1,4 @@
-package org.vending.machine.core;
+package org.rvm.core;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,11 +9,11 @@ import java.util.List;
 
 class SimpleVendingMachineTest {
 
-    VendingMachine vendingMachine;
+    ReverseVendingMachine vendingMachine;
 
     @BeforeEach
     void setUp() {
-        vendingMachine = new SimpleVendingMachine();
+        vendingMachine = new SimpleReverseVendingMachine();
     }
 
     @Test

@@ -1,4 +1,4 @@
-package org.vending.machine.core;
+package org.rvm.core;
 
 import java.util.HashMap;
 import java.util.Map;
