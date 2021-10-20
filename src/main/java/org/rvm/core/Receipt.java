@@ -13,6 +13,16 @@ public class Receipt {
         this.total = 0;
     }
 
+    @Override
+    public String toString() {
+        String stringReceipt = "";
+        for (Class key: pants.keySet()) {
+            stringReceipt+=String.format("%sX%d\n", key.getName(), pants.get(key));
+        }
+        stringReceipt+=String.format("Total: %d NOK", total);
+        return stringReceipt;
+    }
+
     public Receipt(Receipt receipt) {
         this.pants = new HashMap<>(receipt.getPant());
         this.total = Integer.valueOf(receipt.getTotal());

@@ -5,20 +5,34 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 
 class SimpleVendingMachineTest {
 
     ReverseVendingMachine vendingMachine;
+    private Integer value;
+    UnaryOperator<Pant> action = pant -> {
+        value = pant.price();
+        return pant;
+    };
 
     @BeforeEach
     void setUp() {
-        vendingMachine = new SimpleReverseVendingMachine();
+        vendingMachine = new SimpleReverseVendingMachine(action);
     }
 
     @Test
     void test_vending_machine_empty_at_startup() {
         Assertions.assertThat(vendingMachine.collect()).isEmpty();
+    }
+
+    @Test
+    void test_action_is_executed() {
+        vendingMachine.accept(new Bottle());
+        Assertions.assertThat(value).isEqualTo(new Bottle().price());
+        vendingMachine.accept(new Can());
+        Assertions.assertThat(value).isEqualTo(new Can().price());
     }
 
     @Test
