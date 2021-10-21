@@ -1,8 +1,11 @@
 package org.rvm.core;
 
-public class Bottle implements Pant {
+public class Bottle extends Container {
+
+    private Integer value = 5;
+
     @Override
-    public Integer price() {
-        return 5;
+    public Integer getValue() {
+        return value;
     }
 }

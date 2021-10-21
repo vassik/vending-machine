@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface ReverseVendingMachine {
 
-    Receipt accept(Pant pant);
+    Receipt accept(Container container);
 
     Receipt commit();
 
-    List<Pant> collect();
+    List<Container> collect();
 }

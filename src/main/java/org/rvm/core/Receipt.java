@@ -5,37 +5,37 @@ import java.util.Map;
 
 public class Receipt {
 
-    Map<Class<? extends Pant>, Integer> pants;
+    Map<Class<? extends Container>, Integer> containers;
     Integer total;
 
     public Receipt() {
-        this.pants = new HashMap<>();
+        this.containers = new HashMap<>();
         this.total = 0;
     }
 
     @Override
     public String toString() {
         String stringReceipt = "";
-        for (Class key: pants.keySet()) {
-            stringReceipt+=String.format("%s x %d; ", key, pants.get(key));
+        for (Class key: containers.keySet()) {
+            stringReceipt+=String.format("%s x %d; ", key, containers.get(key));
         }
         stringReceipt+=String.format("Total: %d NOK", total);
         return stringReceipt;
     }
 
     public Receipt(Receipt receipt) {
-        this.pants = new HashMap<>(receipt.getPants());
+        this.containers = new HashMap<>(receipt.getContainers());
         this.total = Integer.valueOf(receipt.getTotal());
     }
 
-    public void commit(Pant pant) {
-        Integer number = pants.getOrDefault(pant.getClass(), 0);
-        pants.put(pant.getClass(), ++number);
-        total += pant.price();
+    public void commit(Container pant) {
+        Integer number = containers.getOrDefault(pant.getClass(), 0);
+        containers.put(pant.getClass(), ++number);
+        total += pant.getValue();
     }
 
-    public Map<Class<? extends Pant>, Integer> getPants() {
-        return new HashMap<>(pants);
+    public Map<Class<? extends Container>, Integer> getContainers() {
+        return new HashMap<>(containers);
     }
 
     public Integer getTotal() {

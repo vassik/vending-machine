@@ -12,25 +12,25 @@ import java.util.function.UnaryOperator;
 @Component
 public class SimpleReverseVendingMachine implements ReverseVendingMachine {
 
-    private final UnaryOperator<Pant> action;
-    List<Pant> pants;
+    private final UnaryOperator<Container> action;
+    List<Container> pants;
     Receipt receipt;
     Logger logger = LoggerFactory.getLogger(SimpleReverseVendingMachine.class);
 
     @Autowired
-    public SimpleReverseVendingMachine(UnaryOperator<Pant> action) {
+    public SimpleReverseVendingMachine(UnaryOperator<Container> action) {
         this.pants = new ArrayList<>();
         this.action = action;
         this.receipt = new Receipt();
     }
 
     @Override
-    public Receipt accept(Pant pant) {
-        action.apply(pant);
-        pants.add(pant);
-        logger.info("just accept a new: " + pant.getClass().getName());
+    public Receipt accept(Container container) {
+        action.apply(container);
+        pants.add(container);
+        logger.info("just accept a new: " + container.getClass().getName());
         receipt = testReceipt();
-        receipt.commit(pant);
+        receipt.commit(container);
         return receipt;
     }
 
@@ -43,8 +43,8 @@ public class SimpleReverseVendingMachine implements ReverseVendingMachine {
     }
 
     @Override
-    public List<Pant> collect() {
-        List<Pant> pantToCollect = new ArrayList<>(pants);
+    public List<Container> collect() {
+        List<Container> pantToCollect = new ArrayList<>(pants);
         pants.clear();
         logger.info("collected turned in bottles: " + pantToCollect.size());
         return pantToCollect;
