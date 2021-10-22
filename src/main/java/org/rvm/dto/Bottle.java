@@ -1,4 +1,4 @@
-package org.rvm.core;
+package org.rvm.dto;
 
 public class Bottle extends Container {
 

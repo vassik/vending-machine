@@ -1,8 +1,8 @@
-package org.rvm.core;
+package org.rvm.dto;
 
 public class Can extends Container {
 
-    private Integer value = 2;
+    private final Integer value = 2;
 
     @Override
     public Integer getValue() {

@@ -1,6 +1,6 @@
 package org.rvm.api;
 
-import org.rvm.core.Container;
+import org.rvm.dto.Container;
 import org.rvm.core.Receipt;
 import org.rvm.core.ReverseVendingMachine;
 import org.springframework.beans.factory.annotation.Autowired;

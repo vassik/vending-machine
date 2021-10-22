@@ -3,6 +3,8 @@ package org.rvm.core;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.rvm.dto.Container;
+
 public class Receipt {
 
     Map<Class<? extends Container>, Integer> containers;

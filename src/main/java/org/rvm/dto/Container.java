@@ -1,7 +1,9 @@
-package org.rvm.core;
+package org.rvm.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import org.springframework.lang.NonNull;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", visible = true)
@@ -9,6 +11,7 @@ import org.springframework.lang.NonNull;
         @JsonSubTypes.Type(value = Bottle.class, name = "bottle"),
         @JsonSubTypes.Type(value = Can.class, name = "can")
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Container {
 
     @NonNull

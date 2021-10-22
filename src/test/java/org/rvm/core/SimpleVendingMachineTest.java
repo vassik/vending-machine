@@ -3,6 +3,9 @@ package org.rvm.core;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.rvm.dto.Bottle;
+import org.rvm.dto.Can;
+import org.rvm.dto.Container;
 
 import java.util.List;
 import java.util.function.UnaryOperator;
