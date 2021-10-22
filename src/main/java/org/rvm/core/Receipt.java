@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.rvm.dto.Container;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Receipt {
 
     Map<Class<? extends Container>, Integer> containers;
@@ -34,6 +36,11 @@ public class Receipt {
         Integer number = containers.getOrDefault(pant.getClass(), 0);
         containers.put(pant.getClass(), ++number);
         total += pant.getValue();
+    }
+
+    public void reset() {
+        total = 0;
+        containers.clear();
     }
 
     public Map<Class<? extends Container>, Integer> getContainers() {

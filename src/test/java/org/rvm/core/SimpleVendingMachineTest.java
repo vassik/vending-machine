@@ -7,6 +7,7 @@ import org.rvm.dto.Bottle;
 import org.rvm.dto.Can;
 import org.rvm.dto.Container;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
@@ -22,7 +23,7 @@ class SimpleVendingMachineTest {
 
     @BeforeEach
     void setUp() {
-        vendingMachine = new SimpleReverseVendingMachine(action);
+        vendingMachine = new SimpleReverseVendingMachine(action, new Receipt(), new StandardTrunk());
     }
 
     @Test
@@ -43,10 +44,10 @@ class SimpleVendingMachineTest {
         System.out.println(new Bottle().getValue());
         Receipt receipt = vendingMachine.accept(new Bottle());
         Receipt receipt1 = vendingMachine.accept(new Can());
-        Assertions.assertThat(receipt).isEqualTo(receipt1);
-        Assertions.assertThat(receipt.getTotal()).isEqualTo(new Bottle().getValue() + new Can().getValue());
+        Assertions.assertThat(receipt).isNotEqualTo(receipt1);
+        Assertions.assertThat(receipt1.getTotal()).isEqualTo(new Bottle().getValue() + new Can().getValue());
 
-        vendingMachine.accept(new Can());
+        receipt = vendingMachine.accept(new Can());
         Assertions.assertThat(receipt.getContainers().get(Bottle.class)).isEqualTo(1);
         Assertions.assertThat(receipt.getContainers().get(Can.class)).isEqualTo(2);
 

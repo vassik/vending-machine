@@ -14,44 +14,38 @@ import java.util.function.UnaryOperator;
 public class SimpleReverseVendingMachine implements ReverseVendingMachine {
 
     private final UnaryOperator<Container> action;
-    List<Container> pants;
-    Receipt receipt;
+    private final Trunk trunk;
+    private final Receipt receipt;
     Logger logger = LoggerFactory.getLogger(SimpleReverseVendingMachine.class);
 
     @Autowired
-    public SimpleReverseVendingMachine(UnaryOperator<Container> action) {
-        this.pants = new ArrayList<>();
+    public SimpleReverseVendingMachine(UnaryOperator<Container> action, Receipt receipt, Trunk trunk) {
+        this.trunk = trunk;
         this.action = action;
-        this.receipt = new Receipt();
+        this.receipt = receipt;
     }
 
     @Override
     public Receipt accept(Container container) {
         action.apply(container);
-        pants.add(container);
+        trunk.addContainer(container);
         logger.info("just accept a new: " + container.getClass().getName());
-        receipt = testReceipt();
         receipt.commit(container);
-        return receipt;
+        return new Receipt(receipt);
     }
 
     @Override
     public Receipt commit() {
-        Receipt currentReceipt = new Receipt(testReceipt());
-        receipt = null;
+        Receipt currentReceipt = new Receipt(receipt);
+        receipt.reset();
         logger.info("collecting receipt: " + currentReceipt);
         return currentReceipt;
     }
 
     @Override
     public List<Container> collect() {
-        List<Container> pantToCollect = new ArrayList<>(pants);
-        pants.clear();
+        List<Container> pantToCollect = trunk.emptyTrunk();
         logger.info("collected turned in bottles: " + pantToCollect.size());
         return pantToCollect;
-    }
-
-    private Receipt testReceipt() {
-        return receipt != null ? receipt : new Receipt();
     }
 }
