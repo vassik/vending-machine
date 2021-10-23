@@ -1,12 +1,12 @@
 package org.rvm.core;
 
 import org.rvm.dto.Container;
+import org.rvm.dto.Receipt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
@@ -15,14 +15,14 @@ public class SimpleReverseVendingMachine implements ReverseVendingMachine {
 
     private final UnaryOperator<Container> action;
     private final Trunk trunk;
-    private final Receipt receipt;
+    private final ContainerCashier containerCashier;
     Logger logger = LoggerFactory.getLogger(SimpleReverseVendingMachine.class);
 
     @Autowired
-    public SimpleReverseVendingMachine(UnaryOperator<Container> action, Receipt receipt, Trunk trunk) {
+    public SimpleReverseVendingMachine(UnaryOperator<Container> action, ContainerCashier containerCashier, Trunk trunk) {
         this.trunk = trunk;
         this.action = action;
-        this.receipt = receipt;
+        this.containerCashier = containerCashier;
     }
 
     @Override
@@ -30,14 +30,12 @@ public class SimpleReverseVendingMachine implements ReverseVendingMachine {
         action.apply(container);
         trunk.addContainer(container);
         logger.info("just accept a new: " + container.getClass().getName());
-        receipt.commit(container);
-        return new Receipt(receipt);
+        return containerCashier.addContainer(container);
     }
 
     @Override
     public Receipt commit() {
-        Receipt currentReceipt = new Receipt(receipt);
-        receipt.reset();
+        Receipt currentReceipt = containerCashier.commit();
         logger.info("collecting receipt: " + currentReceipt);
         return currentReceipt;
     }

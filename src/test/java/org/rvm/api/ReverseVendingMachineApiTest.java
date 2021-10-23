@@ -5,12 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.rvm.core.Receipt;
-import org.rvm.core.ReverseVendingMachine;
+import org.rvm.core.ContainerCashier;
 import org.rvm.core.Trunk;
 import org.rvm.dto.Bottle;
 import org.rvm.dto.Can;
 import org.rvm.dto.Container;
+import org.rvm.dto.Receipt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,11 +30,8 @@ class ReverseVendingMachineApiTest {
 
     @Autowired
     private MockMvc mvc;
-
     @Autowired
-    private ReverseVendingMachine reverseVendingMachine;
-    @Autowired
-    private Receipt receipt;
+    private ContainerCashier containerCashier;
     @Autowired
     private Trunk trunk;
 
@@ -46,7 +43,7 @@ class ReverseVendingMachineApiTest {
 
     @BeforeEach
     public void setUp() {
-        receipt.reset();
+        containerCashier.commit();
         trunk.emptyTrunk();
     }
 
@@ -69,11 +66,11 @@ class ReverseVendingMachineApiTest {
                 .andExpect(status().isOk()).andReturn();
 
         String jsonString = result.getResponse().getContentAsString();
-        System.out.println(jsonString);
         ObjectMapper objectMapper = new ObjectMapper();
-        Receipt receipt = objectMapper.readValue(jsonString, new TypeReference<Receipt>() {});
+        Receipt receipt = objectMapper.readValue(jsonString, new TypeReference<Receipt>() {
+        });
         Assertions.assertThat(receipt.getTotal()).isEqualTo(bottlePrice);
-        Assertions.assertThat(receipt.getContainers().get(Bottle.class)).isEqualTo(1);
+        Assertions.assertThat(receipt.getContainers().get(Container.Type.BOTTLE)).isEqualTo(1);
     }
 
     @Test

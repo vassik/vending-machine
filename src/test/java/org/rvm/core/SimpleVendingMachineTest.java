@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.rvm.dto.Bottle;
 import org.rvm.dto.Can;
 import org.rvm.dto.Container;
+import org.rvm.dto.Receipt;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
@@ -23,7 +23,7 @@ class SimpleVendingMachineTest {
 
     @BeforeEach
     void setUp() {
-        vendingMachine = new SimpleReverseVendingMachine(action, new Receipt(), new StandardTrunk());
+        vendingMachine = new SimpleReverseVendingMachine(action, new StandardContainerCashier(), new StandardTrunk());
     }
 
     @Test
@@ -41,20 +41,19 @@ class SimpleVendingMachineTest {
 
     @Test
     void test_vending_machine_accepts_pants() {
-        System.out.println(new Bottle().getValue());
         Receipt receipt = vendingMachine.accept(new Bottle());
         Receipt receipt1 = vendingMachine.accept(new Can());
         Assertions.assertThat(receipt).isNotEqualTo(receipt1);
         Assertions.assertThat(receipt1.getTotal()).isEqualTo(new Bottle().getValue() + new Can().getValue());
 
         receipt = vendingMachine.accept(new Can());
-        Assertions.assertThat(receipt.getContainers().get(Bottle.class)).isEqualTo(1);
-        Assertions.assertThat(receipt.getContainers().get(Can.class)).isEqualTo(2);
+        Assertions.assertThat(receipt.getContainers().get(Container.Type.BOTTLE)).isEqualTo(1);
+        Assertions.assertThat(receipt.getContainers().get(Container.Type.CAN)).isEqualTo(2);
 
         Receipt receipt2 = vendingMachine.commit();
         Assertions.assertThat(receipt2).isNotNull().isNotEqualTo(receipt);
-        Assertions.assertThat(receipt2.getContainers().get(Bottle.class)).isEqualTo(1);
-        Assertions.assertThat(receipt2.getContainers().get(Can.class)).isEqualTo(2);
+        Assertions.assertThat(receipt2.getContainers().get(Container.Type.BOTTLE)).isEqualTo(1);
+        Assertions.assertThat(receipt2.getContainers().get(Container.Type.CAN)).isEqualTo(2);
 
         Receipt receipt4 = vendingMachine.accept(new Bottle());
         Assertions.assertThat(receipt4).isNotNull().isNotEqualTo(receipt);

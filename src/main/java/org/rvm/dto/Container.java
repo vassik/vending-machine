@@ -20,18 +20,35 @@ public abstract class Container {
     public abstract Integer getValue();
 
     public enum Type {
-        BOTTLE("bottle"),
-        CAN("can");
+        BOTTLE("bottle", Bottle.class),
+        CAN("can", Can.class),
+        UNKNOWN("unknown", Container.class);
 
         private final String stringType;
+        private final Class<? extends Container> klass;
 
-        Type(String stringType) {
+        Type(String stringType, Class<? extends Container> klass) {
             this.stringType = stringType;
+            this.klass = klass;
         }
 
         @Override
         public String toString() {
             return stringType;
+        }
+
+        public Class<? extends Container> getContainerClass() {
+            return klass;
+        }
+
+        public static Type typeByClass(Class<? extends Container> klass) {
+            if (Bottle.class.equals(klass)) {
+                return Type.BOTTLE;
+            } else if (Can.class.equals(klass)) {
+                return Type.CAN;
+            } else {
+                return Type.UNKNOWN;
+            }
         }
     }
 }
