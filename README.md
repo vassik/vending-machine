@@ -25,20 +25,13 @@ Application is written in java 11 and requires maven.
 1. Clone the repo: ```git clone https://github.com/vassik/vending-machine.git```
 2. To compile and test: ```mvn clean install```
 3. To run: ```java -jar target/machine-0.0.1-SNAPSHOT.jar```
-
-Application API can now be accessed at:
-```
-http://localhost:8080/swagger.html
-```
+4. Application API can now be accessed at: ```http://localhost:8080/swagger.html```
 
 Alternatively, we can simply run ```./rvm.sh```. The script will build and run a docker image locally.
 
 ### CI
 Application utilizes GitHub actions to implement the CI pipeline. The pipeline is locations in the 
-.github/workrflow folder. The pipeline compiles application every timer there is a push action
-to the repository. The pipeline produces to type of images, i.e. we produce vassik/rvm:latest
-on main branch and on any other branch we create vassik/rvm:<branch_name>. The application
-can be run with docker locally as follows:
-```
-docker run -p 8080:8080 vassik/rvm
-```
+```.github/workrflow``` folder. The pipeline compiles application every timer if there is a push 
+to the repository. The pipeline produces to type of images, i.e. we produce ```vassik/rvm:latest```
+on main branch and on any other branch we create ```vassik/rvm:<branch_name>```. The application
+can be run with docker locally as follows: ```docker run -p 8080:8080 vassik/rvm```
