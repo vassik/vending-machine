@@ -22,6 +22,7 @@ A drinks' manufacturer can collect used containers for recycling.
 ## Build and Run
 ### Compile and run locally
 Application is written in java 11 and requires maven.
+
 Clone the repo:
 ```
 git clone https://github.com/vassik/vending-machine.git
@@ -34,13 +35,13 @@ To run:
 ```
 java -jar target/machine-0.0.1-SNAPSHOT.jar
 ```
-Application API can now accessed at
+Application API can now be accessed at:
 ```
 http://localhost:8080/swagger.html
 ```
 
 ### CI
-Application utilizes GitHub actions to implement the CI pipeline. The pipline is locations in the 
+Application utilizes GitHub actions to implement the CI pipeline. The pipeline is locations in the 
 .github/workrflow folder. The pipeline compiles application every timer there is a push action
 to the repository. The pipeline produces to type of images, i.e. we produce vassik/rvm:latest
 on main branch and on any other branch we create vassik/rvm:<branch_name>. The application
