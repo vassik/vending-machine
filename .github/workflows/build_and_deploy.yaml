@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./
-          file: ./Dockerfile
+          file: ./.github/workflows/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/rvm:latest
       - name: Build and push docker image with branch tag
@@ -40,6 +40,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./
-          file: ./Dockerfile
+          file: ./.github/workflows/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/rvm:${{ steps.extract_branch.outputs.branch }}
