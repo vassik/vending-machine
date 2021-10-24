@@ -42,5 +42,3 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/rvm:${{ steps.extract_branch.outputs.branch }}
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
