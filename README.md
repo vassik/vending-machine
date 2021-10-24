@@ -27,7 +27,7 @@ Application is written in java 11 and requires maven.
 3. To run: ```java -jar target/machine-0.0.1-SNAPSHOT.jar```
 4. Application API can now be accessed at: ```http://localhost:8080/swagger.html```
 
-Alternatively, we can simply run ```./rvm.sh```. The script will build and run a docker image locally.
+Alternatively, we can simply clone the repo and run ```./rvm.sh```. The script will build and run a docker image locally.
 
 ### CI
 Application utilizes GitHub actions to implement the CI pipeline. The pipeline is locations in the 
