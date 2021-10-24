@@ -2,6 +2,7 @@ name: Reverse Vending Machine (RVM) CI
 on: [push]
 jobs:
   build:
+    name: Builds application and deploys an image on DockerHub
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
