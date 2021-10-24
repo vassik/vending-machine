@@ -22,23 +22,16 @@ A drinks' manufacturer can collect used containers for recycling.
 ## Build and Run
 ### Compile and run locally
 Application is written in java 11 and requires maven.
+1. Clone the repo: ```git clone https://github.com/vassik/vending-machine.git```
+2. To compile and test: ```mvn clean install```
+3. To run: ```java -jar target/machine-0.0.1-SNAPSHOT.jar```
 
-Clone the repo:
-```
-git clone https://github.com/vassik/vending-machine.git
-```
-To compile and test:
-```
-mvn clean install
-```
-To run:
-```
-java -jar target/machine-0.0.1-SNAPSHOT.jar
-```
 Application API can now be accessed at:
 ```
 http://localhost:8080/swagger.html
 ```
+
+Alternatively, we can simply run ```./rvm.sh```. The script will build and run a docker image locally.
 
 ### CI
 Application utilizes GitHub actions to implement the CI pipeline. The pipeline is locations in the 
